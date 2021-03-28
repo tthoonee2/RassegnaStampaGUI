@@ -18,9 +18,9 @@ window = tk.Tk()
 #Useful label:
 label = tk.Label(
     text='Label_txt',
-    fg="font_color", #can be hexadecimal
-    bg='background_color', #can be hexadecimal
-    width='selected witdh',
+    fg="blue", #can be hexadecimal
+    bg='green', #can be hexadecimal
+    width=50,
 )
 
 #getting user imput
