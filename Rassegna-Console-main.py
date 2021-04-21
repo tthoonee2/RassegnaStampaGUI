@@ -9,17 +9,18 @@ import feedparser
 """
 file = open('linkssaved.txt', 'x')
 choice = input('insert a link? [y/n]\n')
-while choice is 'y':
-    new_link = str(input('insert a new link to be added to your favorites: '))
-    response = requests.get(new_link)
-    if response == 200: #loaded the rss, so the link is very much probably valid
+if choice is y:
+    while choice is 'y':
+        new_link = str(input('insert a new link to be added to your favorites: '))
         try:
-            file = open("linkssaved.txt", "w")
-            file.write(new_link,'\n')
-            choice = input('insert a link? [y/n]\n')
+            response = requests.get(new_link)
+            if response == 200: #loaded the rss, so the link is very much probably valid
+                file = open("linkssaved.txt", "w")
+                file.write(new_link,'\n')
+                choice = input('insert a link? [y/n]\n')
         except:
-            print('unable to open the file')
-            break
+                print('unable to open the file')
+                break
 
     #run the rest of the program
 try:
