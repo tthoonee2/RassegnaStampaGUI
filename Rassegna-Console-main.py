@@ -7,26 +7,36 @@ import feedparser
     b. request of link - verify get and try exception [200]
     c.add link to a new line in the file.
 """
-file = open('linkssaved.txt', 'x')
+try:
+    file = open('linkssaved.txt', 'w')
+except:
+    file = open('linkssaved.txt', 'x')
+listoflinks = []
 choice = input('insert a link? [y/n]\n')
-if choice is y:
+if choice is 'y':
     while choice is 'y':
         new_link = str(input('insert a new link to be added to your favorites: '))
-        try:
-            response = requests.get(new_link)
-            if response == 200: #loaded the rss, so the link is very much probably valid
-                file = open("linkssaved.txt", "w")
-                file.write(new_link,'\n')
-                choice = input('insert a link? [y/n]\n')
-        except:
-                print('unable to open the file')
-                break
+        response = requests.get(new_link)
+        print(response)
+        response = str(response)
+        if response == '<Response [200]>': #loaded the rss, so the link is very much probably valid
+            listoflinks.append(new_link)
+            choice = input('insert a link? [y/n]\n')
+        else:
+            choice = input('insert a link? [y/n]\n')
+else:
+    pass
 
+file.writelines(listoflinks)
+
+file.close()
+
+file = open("linkssaved.txt", 'r')
+print('ho aperto il file')
+
+    
     #run the rest of the program
-try:
-    file = open.file("linksaved.txt", 'rt')
-except:
-    print('unable to open the file')
+
 
 #2.access the links and reading the new rss of today
 """
@@ -44,11 +54,15 @@ for i in file.readlines():
     all_choices[ii] = temp_list[i]
     print('[',i,']', all_choices[ii])
     
+print(all_choices)
 
+    
+    
 def selection(the_dict):
     z = str(input('Choose your feed: '))
     final_link = the_dict[z]
     return final_link
+
 
 news = feedparser.parse(selection(all_choices))
 for count in news.entries:
